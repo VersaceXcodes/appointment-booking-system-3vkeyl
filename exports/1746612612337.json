@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746612612337,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_AdminNav",
+      "version": "latest"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/components/views/GV_AdminNav.tsx",
+      "type": "text",
+      "size": 2253,
+      "dependencies": false
+    }
+  ]
+}

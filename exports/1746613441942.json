@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746613441942,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_Cancellation",
+      "version": "1746613441255"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/components/views/UV_Cancellation.tsx",
+      "type": "text",
+      "size": 4252,
+      "dependencies": false
+    }
+  ]
+}

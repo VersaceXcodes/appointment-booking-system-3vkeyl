@@ -1,0 +1,21 @@
+{
+  "timestamp": 1746611734206,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/backend/package.json",
+      "type": "text",
+      "size": 782,
+      "dependencies": true
+    },
+    {
+      "path": "../../apps/appointment-booking-system/backend/.env",
+      "type": "text",
+      "size": 378,
+      "dependencies": false
+    }
+  ]
+}

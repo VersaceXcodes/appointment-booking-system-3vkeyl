@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746612611242,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "GV_Footer",
+      "version": "1746612158043"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/components/views/GV_Footer.tsx",
+      "type": "text",
+      "size": 2490,
+      "dependencies": false
+    }
+  ]
+}

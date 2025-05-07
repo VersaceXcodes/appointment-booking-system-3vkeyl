@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746612211004,
+  "operation": {
+    "id": "webapp:react:root",
+    "refs": {
+      "id": "app",
+      "version": "latest"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/App.tsx",
+      "type": "text",
+      "size": 3631,
+      "dependencies": false
+    }
+  ]
+}

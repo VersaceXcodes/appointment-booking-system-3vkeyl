@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746613372444,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_Reschedule",
+      "version": "1746613372006"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/components/views/UV_Reschedule.tsx",
+      "type": "text",
+      "size": 10038,
+      "dependencies": false
+    }
+  ]
+}

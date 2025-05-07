@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746613051642,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_BookingPage",
+      "version": "1746613051324"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/components/views/UV_BookingPage.tsx",
+      "type": "text",
+      "size": 10515,
+      "dependencies": false
+    }
+  ]
+}

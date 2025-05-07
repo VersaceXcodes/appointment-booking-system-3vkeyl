@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746611645834,
+  "operation": {
+    "id": "backend:specifications:openapi"
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/backend/openapi.yaml",
+      "type": "text",
+      "size": 13774,
+      "dependencies": false
+    }
+  ]
+}

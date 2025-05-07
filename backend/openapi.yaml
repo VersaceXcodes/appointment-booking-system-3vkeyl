@@ -1,0 +1,532 @@
+openapi: 3.0.0
+info:
+  title: Appointment Booking System API
+  version: 1.0.0
+  description: Comprehensive API for the Appointment Booking System MVP.
+servers:
+  - url: http://localhost:3000
+paths:
+  /api/auth/register:
+    post:
+      summary: Register a new user
+      operationId: register_user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserRegistrationRequest"
+      responses:
+        "201":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Bad Request - Invalid input or email already exists
+  /api/auth/login:
+    post:
+      summary: Authenticate user and return token
+      operationId: login_user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserLoginRequest"
+      responses:
+        "200":
+          description: User authenticated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserLoginResponse"
+        "401":
+          description: Unauthorized - Invalid credentials
+  /api/time-slots:
+    get:
+      summary: Retrieve available time slots for a given date
+      operationId: get_time_slots
+      tags:
+        - Time Slots
+      parameters:
+        - in: query
+          name: date
+          required: true
+          schema:
+            type: string
+          description: Date for which to retrieve available time slots (YYYY-MM-DD)
+      responses:
+        "200":
+          description: List of available time slots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TimeSlot"
+        "400":
+          description: Bad Request - Invalid date parameter
+  /api/appointments:
+    post:
+      summary: Book an appointment
+      operationId: create_appointment
+      tags:
+        - Appointments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentCreateRequest"
+      responses:
+        "201":
+          description: Appointment booked successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+        "400":
+          description: Bad Request - Invalid booking data or time slot unavailable
+      security: []
+    get:
+      summary: Get appointments for authenticated user
+      operationId: get_appointments
+      tags:
+        - Appointments
+      responses:
+        "200":
+          description: List of user's appointments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+  /api/appointments/{appointment_uid}/reschedule:
+    put:
+      summary: Reschedule an appointment
+      operationId: reschedule_appointment
+      tags:
+        - Appointments
+      parameters:
+        - in: path
+          name: appointment_uid
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RescheduleAppointmentRequest"
+      responses:
+        "200":
+          description: Appointment rescheduled successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RescheduleAppointmentResponse"
+        "400":
+          description: Bad Request - Invalid reschedule data or time slot unavailable
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+  /api/appointments/{appointment_uid}:
+    delete:
+      summary: Cancel an appointment
+      operationId: cancel_appointment
+      tags:
+        - Appointments
+      parameters:
+        - in: path
+          name: appointment_uid
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the appointment to cancel
+      responses:
+        "200":
+          description: Appointment cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CancelAppointmentResponse"
+        "400":
+          description: Bad Request - Invalid cancellation request
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+  /api/admin/time-slots:
+    get:
+      summary: Get admin time slots for a given date
+      operationId: admin_get_time_slots
+      tags:
+        - Admin Time Slots
+      parameters:
+        - in: query
+          name: date
+          required: false
+          schema:
+            type: string
+          description: Optional date filter (YYYY-MM-DD) for time slots
+      responses:
+        "200":
+          description: List of admin time slots
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TimeSlot"
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+    post:
+      summary: Create a new time slot as admin
+      operationId: admin_create_time_slot
+      tags:
+        - Admin Time Slots
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeSlotCreateRequest"
+      responses:
+        "201":
+          description: Time slot created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeSlot"
+        "400":
+          description: Bad Request - Invalid time slot data
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+  /api/admin/time-slots/{time_slot_uid}:
+    put:
+      summary: Update a time slot as admin
+      operationId: admin_update_time_slot
+      tags:
+        - Admin Time Slots
+      parameters:
+        - in: path
+          name: time_slot_uid
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the time slot to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeSlotUpdateRequest"
+      responses:
+        "200":
+          description: Time slot updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeSlot"
+        "400":
+          description: Bad Request - Invalid update data or time slot not found
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+    delete:
+      summary: Delete a time slot as admin
+      operationId: admin_delete_time_slot
+      tags:
+        - Admin Time Slots
+      parameters:
+        - in: path
+          name: time_slot_uid
+          required: true
+          schema:
+            type: string
+          description: Unique identifier of the time slot to delete
+      responses:
+        "200":
+          description: Time slot deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "400":
+          description: Bad Request - Time slot cannot be deleted
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+  /api/admin/appointments:
+    get:
+      summary: Get admin appointments filtered by status
+      operationId: admin_get_appointments
+      tags:
+        - Admin Appointments
+      parameters:
+        - in: query
+          name: status
+          required: false
+          schema:
+            type: string
+          description: Optional status filter (booked, cancelled, rescheduled)
+      responses:
+        "200":
+          description: List of appointments for admin
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Appointment"
+        "401":
+          description: Unauthorized - Invalid or missing token
+      security:
+        - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    UserRegistrationRequest:
+      type: object
+      required:
+        - name
+        - email
+        - password
+        - phone
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+    User:
+      type: object
+      required:
+        - user_uid
+        - name
+        - email
+        - phone
+        - role
+        - created_at
+        - updated_at
+      properties:
+        user_uid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        role:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    UserLoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    UserLoginResponse:
+      type: object
+      required:
+        - token
+        - user
+      properties:
+        token:
+          type: string
+        user:
+          $ref: "#/components/schemas/User"
+    TimeSlot:
+      type: object
+      required:
+        - time_slot_uid
+        - admin_uid
+        - slot_date
+        - start_time
+        - end_time
+        - availability_status
+        - created_at
+        - updated_at
+      properties:
+        time_slot_uid:
+          type: string
+        admin_uid:
+          type: string
+        slot_date:
+          type: string
+        start_time:
+          type: string
+        end_time:
+          type: string
+        availability_status:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    TimeSlotCreateRequest:
+      type: object
+      required:
+        - slot_date
+        - start_time
+        - end_time
+      properties:
+        slot_date:
+          type: string
+        start_time:
+          type: string
+        end_time:
+          type: string
+    TimeSlotUpdateRequest:
+      type: object
+      properties:
+        slot_date:
+          type: string
+        start_time:
+          type: string
+        end_time:
+          type: string
+        availability_status:
+          type: string
+    Appointment:
+      type: object
+      required:
+        - appointment_uid
+        - time_slot_uid
+        - customer_name
+        - customer_email
+        - customer_phone
+        - booking_reference
+        - status
+        - created_at
+        - updated_at
+      properties:
+        appointment_uid:
+          type: string
+        user_uid:
+          type: string
+          nullable: true
+        time_slot_uid:
+          type: string
+        customer_name:
+          type: string
+        customer_email:
+          type: string
+        customer_phone:
+          type: string
+        notes:
+          type: string
+        booking_reference:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    AppointmentCreateRequest:
+      type: object
+      required:
+        - time_slot_uid
+        - customer_name
+        - customer_email
+        - customer_phone
+      properties:
+        time_slot_uid:
+          type: string
+        customer_name:
+          type: string
+        customer_email:
+          type: string
+        customer_phone:
+          type: string
+        notes:
+          type: string
+        user_uid:
+          type: string
+    RescheduleAppointmentRequest:
+      type: object
+      required:
+        - new_time_slot_uid
+      properties:
+        new_time_slot_uid:
+          type: string
+        notes:
+          type: string
+    RescheduleAppointmentResponse:
+      type: object
+      required:
+        - appointment_uid
+        - new_time_slot_uid
+        - status
+        - updated_at
+      properties:
+        appointment_uid:
+          type: string
+        new_time_slot_uid:
+          type: string
+        status:
+          type: string
+        updated_at:
+          type: string
+    CancelAppointmentResponse:
+      type: object
+      required:
+        - appointment_uid
+        - status
+        - updated_at
+      properties:
+        appointment_uid:
+          type: string
+        status:
+          type: string
+        updated_at:
+          type: string
+    MessageResponse:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+tags:
+  - name: Authentication
+  - name: Time Slots
+  - name: Appointments
+  - name: Admin Time Slots
+  - name: Admin Appointments

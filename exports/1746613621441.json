@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746613621441,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_AdminDashboard",
+      "version": "1746613620672"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/components/views/UV_AdminDashboard.tsx",
+      "type": "text",
+      "size": 10808,
+      "dependencies": false
+    }
+  ]
+}

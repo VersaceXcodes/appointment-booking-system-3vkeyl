@@ -1,0 +1,19 @@
+{
+  "timestamp": 1746613511735,
+  "operation": {
+    "id": "webapp:react:views",
+    "refs": {
+      "id": "UV_AdminLogin",
+      "version": "latest"
+    }
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/src/components/views/UV_AdminLogin.tsx",
+      "type": "text",
+      "size": 4521,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746611729138,
+  "operation": {
+    "id": "backend:server:main"
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/backend/server.js",
+      "type": "text",
+      "size": 20892,
+      "dependencies": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746611448236,
+  "operation": {
+    "id": "db:postgres"
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/backend/db.sql",
+      "type": "text",
+      "size": 4726,
+      "dependencies": false
+    }
+  ]
+}

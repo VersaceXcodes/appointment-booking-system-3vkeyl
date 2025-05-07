@@ -1,0 +1,15 @@
+{
+  "timestamp": 1746612536751,
+  "operation": {
+    "id": "settings:config:package"
+  },
+  "projectId": "appointment-booking-system",
+  "files": [
+    {
+      "path": "../../apps/appointment-booking-system/vitereact/package.json",
+      "type": "text",
+      "size": 2918,
+      "dependencies": true
+    }
+  ]
+}
